@@ -4,16 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:main_abzar_sanat_app/features/login/presentation/register_code.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class PhoneEntry extends StatelessWidget {
-  const PhoneEntry({Key? key}) : super(key: key);
+import '../controller/phone_entry_controller.dart';
 
+class PhoneEntry extends StatelessWidget {
+  final PhoneEntryController phoneController = Get.put(PhoneEntryController());
+
+  PhoneEntry({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final TextEditingController _controller = TextEditingController();
+
 
 
     return Scaffold(
@@ -38,33 +41,33 @@ class PhoneEntry extends StatelessWidget {
 
                 const Text(' خوش آمدید',style: TextStyle(fontSize:30, fontWeight: FontWeight.w700),),
 
-                const Text('لطفا شماره موبایل خود را وارد نمایید', style: TextStyle(fontSize: 18),),
+                Obx(()=>Text('${phoneController.errorMessage.value}',style:TextStyle(color: phoneController.colorthem.value),),),
                 SizedBox(height:25),
                 // **********************Text Field Start********************
-                  Container(
-                    width: 70.w,
-                    height: 10.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: TextField(
-                        controller: _controller,
-                        decoration:const InputDecoration(
-                          icon: Icon(Icons.phone_android_outlined),
-                          hintText: '091*******',
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(color: Colors.grey),
-
-                        ),
-                        keyboardType: TextInputType.number,
-                        style:TextStyle(fontSize: 18, fontWeight:FontWeight.w700),
+                Container(
+                  width: 70.w,
+                  height: 10.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: TextField(
+                      controller: _controller,
+                      decoration:const InputDecoration(
+                        icon: Icon(Icons.phone_android_outlined),
+                        hintText: '091*******',
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(color: Colors.grey),
 
                       ),
+                      keyboardType: TextInputType.number,
+                      style:TextStyle(fontSize: 18, fontWeight:FontWeight.w700),
+
                     ),
                   ),
+                ),
 
 
                 // *******************************Text Field End************************
@@ -80,8 +83,9 @@ class PhoneEntry extends StatelessWidget {
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25))),
                   ),
 
-                  onPressed: (){
-                    Get.to(RegisteryCode());
+                  onPressed: ()  {
+                      phoneController.sendPhone(_controller.text);
+                      //   PhoneEntryController().sendPhone(_controller.text);
                   },
                   child: const Text('ارسال کد',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700, fontSize: 18)),
                 ),

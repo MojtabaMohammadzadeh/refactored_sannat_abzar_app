@@ -6,7 +6,8 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class RegisteryCode extends StatelessWidget {
-  const RegisteryCode({Key? key}) : super(key: key);
+  final String phoneNumber;
+   RegisteryCode({Key? key,required this.phoneNumber}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

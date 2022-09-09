@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           getPages: [
             GetPage(name: '/home', page:() => MainNavPage()),
             GetPage(name: '/entery', page:() => PhoneEntry()),
-            GetPage(name: '/register', page:() =>  RegisteryCode()),
+
             GetPage(name: '/listbrands', page: () => BrandsList() ),
             GetPage(name: '/singlebrand', page: () => SingleBrand()),
             GetPage(name: '/shopallproducts', page: () => AllProductsStore()),
