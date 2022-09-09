@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get_storage/get_storage.dart';
-import '../models/send_phone_response.dart';
+import '../models/send_phone_model.dart';
 
 class SendPhoneRemote {
 

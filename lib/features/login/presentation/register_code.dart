@@ -2,15 +2,24 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../controller/rigester_code_controller.dart';
+
 class RegisteryCode extends StatelessWidget {
+
   final String phoneNumber;
    RegisteryCode({Key? key,required this.phoneNumber}) : super(key: key);
 
+  RigestryCodeController rigesterController = Get.put(RigestryCodeController());
+
+
   @override
   Widget build(BuildContext context) {
+    var Codeinput;
     return Scaffold(
       backgroundColor: const Color(0xfff7dcd3),
       body: ListView(
@@ -58,21 +67,17 @@ class RegisteryCode extends StatelessWidget {
                   animationDuration: const Duration(milliseconds: 300),
 
                   enableActiveFill: true,
-                  // errorAnimationController: errorController,
-                  // controller: textEditingController,
-                  onCompleted: (v) {
-                    print("Completed");
+
+                  appContext:context,
+                  onChanged: (String value) {
+                    rigesterController.updateCode(value);
                   },
-                  onChanged: (value) {
-                    print(value);
+                  onCompleted: (String value){
+                    rigesterController.updateCode(value);
+                  },
+                  onSubmitted: (String value){
 
                   },
-                  beforeTextPaste: (text) {
-                    print("Allowing to paste $text");
-                    //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                    //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                    return true;
-                  }, appContext:context,
 
                 ),
               ),
@@ -90,11 +95,9 @@ class RegisteryCode extends StatelessWidget {
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25),)),
                 ),
                 onPressed: (){
-                  Navigator.pushReplacementNamed(
-
-                    context,'/home' ,
-                  );
-                },
+                  // print('this is code input');
+                  // print(Codeinput);
+                  rigesterController.sendCode(phoneNumber); },
                 child: const Text('ورود',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700, fontSize: 18,   ),),
               ),
 
