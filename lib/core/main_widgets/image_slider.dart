@@ -6,12 +6,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../features/brands_viwe/model/sliders.dart';
+import '../constants/constants.dart';
+
 class ImageSlider extends StatelessWidget {
-  const ImageSlider({Key? key}) : super(key: key);
+  final List<Sliders1> slidersData;
+   ImageSlider({Key? key, required this.slidersData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
+      
       options: CarouselOptions(
         autoPlay: true,
         viewportFraction: 0.9,
@@ -19,7 +24,7 @@ class ImageSlider extends StatelessWidget {
         initialPage: 2,
         enableInfiniteScroll: true,
       ),
-      itemCount: 15,
+      itemCount: slidersData.length,
       itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
           Container(
 
@@ -27,7 +32,8 @@ class ImageSlider extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.red,
               borderRadius: BorderRadius.circular(25),
-              image: const DecorationImage(
+              image:  DecorationImage(
+                // image: NetworkImage('${Constants.baseUrl}${slidersData[itemIndex].img}' ?? '') ,
                 image: AssetImage('assets/img/01.jpg'),
                 fit: BoxFit.cover,
               ),

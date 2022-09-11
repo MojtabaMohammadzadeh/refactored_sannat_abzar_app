@@ -42,7 +42,7 @@ class SingleBrand extends StatelessWidget {
             child:ListView(
               children: [
                 const SizedBox(height: 15,),
-                ImageSlider(),
+                // ImageSlider(),
                 const SizedBox(height: 20,),
                 LastPrice(),
                 const SizedBox(height: 15,),

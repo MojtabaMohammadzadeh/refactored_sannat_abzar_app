@@ -49,7 +49,7 @@ class AllProductsStore extends StatelessWidget {
           ),
           Container(
             width: 100.w,
-            child: TabBarWidget(tabsData: ['محصول اول','محصول دوم','محصول سوم']),
+            // child: TabBarWidget(tabsData: ['محصول اول','محصول دوم','محصول سوم']),
           ),
           SizedBox(height: 5.h,),
           Expanded(

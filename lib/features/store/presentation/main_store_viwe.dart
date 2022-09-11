@@ -16,7 +16,7 @@ class StoreViwe extends StatelessWidget {
     return ListView(
       children: [
         BuildSearch(text: '',),
-        ImageSlider(),
+        // ImageSlider(),
         SizedBox(height: 25,),
 
         TitleWidget(bottomText: 'همه موارد', title: 'فروشگاه نیکوکار',link: '/shopallproducts',),

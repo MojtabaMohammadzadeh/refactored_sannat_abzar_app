@@ -2,8 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../model/all_brands.dart';
+
 class HorizentalListWidget extends StatelessWidget {
-  const HorizentalListWidget({Key? key}) : super(key: key);
+
+  List<AllBrands> listData ;
+   HorizentalListWidget({Key? key, required this.listData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:main_abzar_sanat_app/features/brands_viwe/model/all_brand_categories.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../controller/tab_bar_controller.dart';
@@ -12,7 +13,7 @@ import '../controller/tab_bar_controller.dart';
 
 
 class TabBarWidget extends StatelessWidget {
-  final List<String> tabsData ;
+  final List<AllBrandCategories> tabsData ;
   TabBarWidget({Key? key, required this.tabsData}) : super(key: key);
 TabBarController _tabController = Get.put(TabBarController());
   @override
@@ -61,7 +62,7 @@ TabBarController _tabController = Get.put(TabBarController());
 
                     ),
                     child: Text(
-                      tabsData[index],textAlign: TextAlign.center,
+                      tabsData[index].title?? '',textAlign: TextAlign.center,
                     ),
                   ),
                 );

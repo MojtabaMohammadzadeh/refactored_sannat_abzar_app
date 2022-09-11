@@ -3,63 +3,49 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../controller/first_page_controller.dart';
+import '../model/all_brands.dart';
+
+
 class WrapListViwe extends StatelessWidget {
+  final ProductController controller = Get.put(ProductController());
    WrapListViwe({Key? key}) : super(key: key);
-  List<Choice> choices =  <Choice>[
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png', fields: []),
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png', fields: []),
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png', fields: []),
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png''', fields: []),
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png', fields: []),
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png', fields: []),
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png', fields: []),
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png', fields: []),
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png', fields: []),
-    Choice(title: 'عنوان', link: '/link', image: 'assets/img/ronix-png.png', fields: []),
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
-      child: Wrap(
-
-          children: List.generate(choices.length, (index){
-            return AllCart(title: choices[index].title, link: choices[index].link, image:choices[index].image ,fields:choices[index].fields);
-          },)
-      ),
+      child: Obx((){
+        if(controller.isLoading.isTrue) {
+          return const LoadingContainer();
+        } else {
+          return Wrap( children: List.generate(controller.controllAllBrands.length, (index){
+            return AllCart(controller.controllAllBrands[index]);    }
+          ),);
+        }
+      })
     );
   }
 }
 
 
-class Choice {
-  final String title;
-  final String link, image;
-  final List fields;
-  Choice({required this.title, required this.link, required this.image, required this.fields});
-
-}
 
 
 class AllCart extends StatelessWidget {
-  final String title;
-  final String link;
-  final String image;
-  final List fields;
-  const AllCart({Key? key,
-    required this.title,
-    required this.link,
-    required this.image,
-    required this.fields,}) : super(key: key);
+
+  final AllBrands singleBrand;
+
+
+  AllCart(this.singleBrand);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-
-      },
+      onTap: (){ },
       child: Container(
         margin: const EdgeInsets.all(15),
         width: 40.w,
@@ -87,19 +73,29 @@ class AllCart extends StatelessWidget {
               width: 25.w,
               height: 10.h,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: AssetImage(this.image),
-                    fit: BoxFit.fitWidth,
-                  )
+                borderRadius: BorderRadius.circular(10),
+
               ),
             ),
-            const Text('رونیکس',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
+            Text(singleBrand.name?? 'Not',style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700),),
             const SizedBox(height: 5,),
             const Text(' محصولات 3535 مورد',style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,color: Colors.black45),),
           ],
         ),
       ),
+    );
+  }
+}
+
+
+
+class LoadingContainer extends StatelessWidget {
+  const LoadingContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CircularProgressIndicator(),
     );
   }
 }

@@ -47,7 +47,7 @@ class ProductsDetailsStore extends StatelessWidget {
 
             ],
           ),
-          ImageSlider(),
+          // ImageSlider(),
 
           Text('اره آتشی سه پایه فلزی',style: TextStyle(fontWeight:FontWeight.w700,fontSize: 20),),
 
