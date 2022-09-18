@@ -1,7 +1,6 @@
 import 'sliders.dart';
 
-import 'most_viewed_brands.dart';
-import 'new_brands.dart';
+
 import 'all_brand_categories.dart';
 import 'last_prices.dart';
 import 'all_brands.dart';
@@ -63,17 +62,17 @@ class FirstPageModel {
         sliders2?.add(Sliders1.fromJson(v));
       });
     }
-    List<MostViewedBrands> mostViewedBrands = [];
+    List<AllBrands> mostViewedBrands = [];
     if (json['mostViewedBrands'] != null) {
 
       json['mostViewedBrands'].forEach((v) {
-        mostViewedBrands?.add(MostViewedBrands.fromJson(v));
+        mostViewedBrands?.add(AllBrands.fromJson(v));
       });
     }
-    List<NewBrands> newBrands = [];
+    List<AllBrands> newBrands = [];
     if (json['newBrands'] != null) {
         json['newBrands'].forEach((v) {
-        newBrands?.add(NewBrands.fromJson(v));
+        newBrands?.add(AllBrands.fromJson(v));
       });
     }
     List<AllBrandCategories> allBrandCategories = [];
@@ -162,8 +161,8 @@ class FirstPageModel {
   int? max_upload_img_places;
   List<Sliders1>? sliders1;
   List<Sliders1>? sliders2;
-  List<MostViewedBrands>? mostViewedBrands;
-  List<NewBrands>? newBrands;
+  List<AllBrands>? mostViewedBrands;
+  List<AllBrands>? newBrands;
   List<AllBrandCategories>? allBrandCategories;
   List<LastPrices>? lastPrices;
   List<AllBrands>? allBrands;

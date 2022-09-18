@@ -10,11 +10,6 @@ class LastPrices {
   String? name;
   String? price;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['name'] = name;
-    map['price'] = price;
-    return map;
-  }
+
 
 }

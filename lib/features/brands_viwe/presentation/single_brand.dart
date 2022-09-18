@@ -8,15 +8,33 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../../core/main_widgets/image_slider.dart';
 import '../../../main_nav_page.dart';
+import '../controller/single_brand_controller.dart';
 import '../widgets/contact_about_us.dart';
 import '../widgets/last_price.dart';
+import '../widgets/single_brand_last_price.dart';
 import '../widgets/single_list_viwe.dart';
 
-class SingleBrand extends StatelessWidget {
-  const SingleBrand({Key? key}) : super(key: key);
+class SingleBrand extends StatefulWidget {
+  String? idBrand;
+   SingleBrand({Key? key, required this.idBrand}) : super(key: key);
+
+  @override
+  State<SingleBrand> createState() => _SingleBrandState();
+}
+
+class _SingleBrandState extends State<SingleBrand> {
+  SingleBrandController _controller = Get.put(SingleBrandController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _controller.getSingleBrand(widget.idBrand);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('SingleBrand'),
@@ -38,30 +56,22 @@ class SingleBrand extends StatelessWidget {
 
       body: Column(
         children: [
-          Expanded(
-            child:ListView(
-              children: [
-                const SizedBox(height: 15,),
-                // ImageSlider(),
-                const SizedBox(height: 20,),
-                LastPrice(),
-                const SizedBox(height: 15,),
-                const Text('دسته بندی 1'),
-                const Divider(
-                  height: 2,
-                  thickness: 1,
-                  indent: 10,
 
-                  endIndent: 10,
-                  color: Colors.black12,
-                ),
-                SizedBox(height: 5,),
-                SingleListViwe(),
-              ],
-            ),
+          Expanded(child: ListView(
+            shrinkWrap: true,
+            children: [
+              const SizedBox(height: 15,),
+              ImageSlider(slidersData: [],),
+              const SizedBox(height: 20,),
+              GetBuilder<SingleBrandController>(
+                builder: (_)=> LastPriceSingle(lastPriceData: _controller.controllLastPrice,),),
+              const SizedBox(height: 15,),
 
-          ),
+              GetBuilder<SingleBrandController>(
+                builder: (_)=> SingleListViwe(ListData:_controller.controllCategoryList,),),
 
+            ],
+          )),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

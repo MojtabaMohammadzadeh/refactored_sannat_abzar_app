@@ -5,29 +5,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../controller/first_page_controller.dart';
+
 import '../model/all_brands.dart';
+import '../presentation/single_brand.dart';
 
 
 class WrapListViwe extends StatelessWidget {
-  final ProductController controller = Get.put(ProductController());
-   WrapListViwe({Key? key}) : super(key: key);
+  List <AllBrands> wrapData;
+   WrapListViwe({Key? key, required this.wrapData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
-      child: Obx((){
-        if(controller.isLoading.isTrue) {
-          return const LoadingContainer();
-        } else {
-          return Wrap( children: List.generate(controller.controllAllBrands.length, (index){
-            return AllCart(controller.controllAllBrands[index]);    }
-          ),);
-        }
-      })
+      child: Wrap( children: List.generate(wrapData.length, (index){
+        return AllCart(wrapData[index]);    }
+      ),),
     );
   }
 }
@@ -45,7 +41,9 @@ class AllCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){ },
+      onTap: (){
+        Get.to(SingleBrand(idBrand: singleBrand.id.toString(),));
+      },
       child: Container(
         margin: const EdgeInsets.all(15),
         width: 40.w,

@@ -8,14 +8,16 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:main_abzar_sanat_app/features/brands_viwe/model/all_brand_categories.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../controller/tab_bar_controller.dart';
+import '../controller/first_page_controller.dart';
+
+
 
 
 
 class TabBarWidget extends StatelessWidget {
   final List<AllBrandCategories> tabsData ;
   TabBarWidget({Key? key, required this.tabsData}) : super(key: key);
-TabBarController _tabController = Get.put(TabBarController());
+  ProductController controller = Get.put(ProductController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,47 +28,48 @@ TabBarController _tabController = Get.put(TabBarController());
           reverse: true,
           itemCount: tabsData.length,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => GetBuilder<TabBarController>(
-              builder:(controller){
-                return GestureDetector(
-                  onTap: () {
-                    controller.changeCategories(index);
-                  },
-                  child: Container(
-                    width: 20.w,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                controller.changeCategories(index);
+              },
+              child: Obx((){
+                return Container(
+                  width: 20.w,
 
-                    margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
-                    decoration: BoxDecoration(
-                       color: index == controller.currentIndex
+                  margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
+                  decoration: BoxDecoration(
+                    color: index == controller.currentIndex.value
                         ? Color(0xff67F5A5)
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(
-                            1.0,
-                            2.0,
-                          ),
-                          color: index == controller.currentIndex
-                              ? Color(0xff031547).withOpacity(0.5)
-                              : Colors.transparent,
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                        ), //BoxShadow
-                        //BoxShadow
-                      ],
-                    ),
-                    padding: const EdgeInsets.symmetric(
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(
+                          1.0,
+                          2.0,
+                        ),
+                        color: index == controller.currentIndex.value
+                            ? Color(0xff031547).withOpacity(0.5)
+                            : Colors.transparent,
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                      ), //BoxShadow
+                      //BoxShadow
+                    ],
+                  ),
+                  padding: const EdgeInsets.symmetric(
 
-                      vertical: 10,
+                    vertical: 10,
 
-                    ),
-                    child: Text(
-                      tabsData[index].title?? '',textAlign: TextAlign.center,
-                    ),
+                  ),
+                  child: Text(
+                    tabsData[index].title?? '',textAlign: TextAlign.center,
                   ),
                 );
-              })) ,
+              }),
+            );
+          }) ,
     );
   }
 

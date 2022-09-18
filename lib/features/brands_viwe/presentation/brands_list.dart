@@ -7,18 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:main_abzar_sanat_app/core/main_widgets/search.dart';
+import 'package:main_abzar_sanat_app/features/brands_viwe/controller/first_page_controller.dart';
 import 'package:main_abzar_sanat_app/features/brands_viwe/presentation/single_brand.dart';
 import 'package:main_abzar_sanat_app/main_nav_page.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class BrandsList extends StatelessWidget {
-  const BrandsList({Key? key}) : super(key: key);
-
+  BrandsList({Key? key}) : super(key: key);
+ProductController _controller = Get.put(ProductController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AllBrands'),
+        title: Text('همه برندها'),
         centerTitle: true,
         backgroundColor: Color(0xff0F1B6D),
         actions: <Widget>[
@@ -42,11 +43,11 @@ class BrandsList extends StatelessWidget {
           Expanded(
             child:ListView.builder(
 
-                itemCount: 30,
+                itemCount: _controller.categorizeAllBrand.length,
                 itemBuilder:(context,index){
                   return GestureDetector(
                     onTap: (){
-                      Get.to(SingleBrand());
+                      Get.to(SingleBrand(idBrand: _controller.categorizeAllBrand[index].id.toString(),));
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 15, right: 10,left: 10),
@@ -87,8 +88,8 @@ class BrandsList extends StatelessWidget {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('رونیکس',style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
+                              children:  [
+                                Text(_controller.categorizeAllBrand[index].name??'',style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
                                 SizedBox(height: 15,),
                                 Text('تعداد محصول 35 مورد',style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black45),),
 

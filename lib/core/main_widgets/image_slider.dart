@@ -34,7 +34,7 @@ class ImageSlider extends StatelessWidget {
               borderRadius: BorderRadius.circular(25),
               image:  DecorationImage(
                 // image: NetworkImage('${Constants.baseUrl}${slidersData[itemIndex].img}' ?? '') ,
-                image: AssetImage('assets/img/01.jpg'),
+                  image: AssetImage('assets/img/01.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

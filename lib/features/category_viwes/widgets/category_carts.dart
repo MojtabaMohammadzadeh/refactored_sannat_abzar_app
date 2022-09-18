@@ -7,25 +7,22 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../model/places_category.dart';
 import '../presentation/single_category.dart';
 
 class CategoryCart extends StatelessWidget {
-  final String title;
-  final String link;
-  final String image;
-  final List fields;
-  CategoryCart( {Key? key,
-    required this.title,
-    required this.link,
-    required this.image,
-    required this.fields,
+  List <Placescategory> categoryData;
+  int index;
+  CategoryCart( {Key? key,required this.categoryData, required this.index
+
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap:(){
-         Get.to(SingleCategory());
+
+         Get.to(()=> SingleCategory(categoryId: categoryData[index].id.toString(),));
       },
       child: Container(
         // Widget for Portrait
@@ -58,7 +55,7 @@ class CategoryCart extends StatelessWidget {
           children: [
 
             SizedBox(height: 5,),
-            Text(this.title, style: TextStyle(fontSize:14,fontWeight: FontWeight.w700,color: Colors.white),textAlign: TextAlign.center,),
+            Text(categoryData[index].title??'', style: TextStyle(fontSize:14,fontWeight: FontWeight.w700,color: Colors.white),textAlign: TextAlign.center,),
 
 
             Container(
@@ -67,16 +64,16 @@ class CategoryCart extends StatelessWidget {
 
                 margin: EdgeInsets.only(top: 4.w),
 
-                decoration: BoxDecoration(
-
-                  image: DecorationImage(
-                    image: AssetImage(image),
-                    fit: BoxFit.fill,
-                  ),
+                // decoration: BoxDecoration(
+                //
+                //   image: DecorationImage(
+                //     image: AssetImage(image),
+                //     fit: BoxFit.fill,
+                //   ),
                   // color: Colors.white,
 
 
-                )
+                // )
 
             ),
           ],

@@ -17,63 +17,60 @@ import '../widgets/wrap_list_viwe.dart';
 
 class AllBrandsViwe extends StatelessWidget {
    AllBrandsViwe({Key? key}) : super(key: key);
-   final ProductController firstPageController = Get.put(ProductController());
+   final ProductController controller = Get.put(ProductController());
 
 
   @override
   Widget build(BuildContext context) {
     return Align(
         alignment: Alignment.center,
-      child: Obx((){
-        if (firstPageController.isLoading.isTrue){
-          return const LoadingContainer();
-        }
-        else {
+      child: ListView(
+        children: [
 
-          return ListView(
-            children: [
+          BuildSearch(text: '',),
+          ImageSlider(slidersData: controller.controllSlider1,),
+          GetBuilder<ProductController>(builder: (_)=> TabBarWidget(tabsData: controller.controlltabs,),),
+          const SizedBox(height: 20,),
+          TitleWidget(title: 'پربازدیدها', bottomText: '',link: '',),
+          const SizedBox(height: 5,),
+          const Divider(
+            height: 2,
+            thickness: 1,
+            indent: 10,
 
-              BuildSearch(text: '',),
-              ImageSlider(slidersData: firstPageController.controllSlider1,),
-              TabBarWidget(tabsData: firstPageController.controlltabs,),
-              const SizedBox(height: 20,),
-              TitleWidget(title: 'پربازدیدها', bottomText: 'موارد بیشتر',link: '/listbrands',),
-              const SizedBox(height: 5,),
-              const Divider(
-                height: 2,
-                thickness: 1,
-                indent: 10,
+            endIndent: 10,
+            color: Colors.black12,
+          ),
+          const SizedBox(height: 5,),
+          GetBuilder<ProductController>(
 
-                endIndent: 10,
-                color: Colors.black12,
-              ),
-              const SizedBox(height: 5,),
-              HorizentalListWidget(),
-              const SizedBox(height: 15,),
+            builder: (_)=>HorizentalListWidget(listData: controller.categorizedMostViwe,),),
+
+          const SizedBox(height: 15,),
 
 
-              LastPrice(),
-              const SizedBox(height: 15,),
-              TitleWidget(title: 'جدیدترین ها', bottomText: 'موارد بیشتر', link: '/allbrands',),
-              const Divider( height: 2, thickness: 1, indent: 10, endIndent: 10, color: Colors.black12,),
-              const SizedBox(height: 15,),
-              HorizentalListWidget(),
-              const SizedBox(height: 25,),
-              // ImageSlider(),
-              const SizedBox(height: 25,),
+          GetBuilder<ProductController>(builder: (_)=> LastPrice(lastPriceData: controller.controllLastPrice,),),
+          const SizedBox(height: 15,),
+          TitleWidget(title: 'جدیدترین ها', bottomText: '', link: '',),
+          const Divider( height: 2, thickness: 1, indent: 10, endIndent: 10, color: Colors.black12,),
+          const SizedBox(height: 15,),
+          GetBuilder<ProductController>(builder: (_)=>HorizentalListWidget(listData: controller.categorizeNewBrand,),),
 
-              TitleWidget(title: 'همه', bottomText: 'موارد بیشتر',link: '/allbrands',),
-              const Divider( height: 2, thickness: 1, indent: 10, endIndent: 10, color: Colors.black12,),
+          const SizedBox(height: 25,),
+          ImageSlider(slidersData: controller.controllSlider2,),
+          const SizedBox(height: 25,),
 
-              // WrapListViwe(),
+          TitleWidget(title: 'همه', bottomText: 'موارد بیشتر',link: '/allbrands',),
+          const Divider( height: 2, thickness: 1, indent: 10, endIndent: 10, color: Colors.black12,),
 
-            ],
-          );
-        }
+          GetBuilder<ProductController>(builder: (_)=>WrapListViwe(wrapData: controller.categorizeAllBrand)),
 
-        return Container(child: Text('خطایی به وجود آمده است'),);
-      })
 
-    );
+        ],
+      ),
+
+      );
+
+
   }
 }

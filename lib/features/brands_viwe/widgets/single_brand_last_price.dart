@@ -1,14 +1,15 @@
 
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../model/last_prices.dart';
+import '../model/single_brands/last_price_single_brand.dart';
 
-class LastPrice extends StatelessWidget {
-   List<LastPrices> lastPriceData;
-   LastPrice({Key? key, required this.lastPriceData}) : super(key: key);
+class LastPriceSingle extends StatelessWidget {
+  List<LastPriceSingleBrand> lastPriceData;
+   LastPriceSingle({Key? key, required this.lastPriceData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class LastPrice extends StatelessWidget {
                 itemBuilder: (context,index){
                   return Container(
                     margin: EdgeInsets.only(right: 5),
-                    width:25.w,
+                    width:35.w,
                     height: 10.h,
                     decoration: const BoxDecoration(
                       border: Border(
@@ -52,7 +53,7 @@ class LastPrice extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children:  [
-                        Text(lastPriceData[index].name?? '',style: TextStyle(fontSize: 12),),
+                        Text(lastPriceData[index].name?? '',style: TextStyle(fontSize: 12),textAlign: TextAlign.center,),
                         SizedBox(height: 5,),
                         Divider(
                           height: 2,
@@ -64,7 +65,7 @@ class LastPrice extends StatelessWidget {
                         ),
                         SizedBox(height: 5,),
                         Directionality(textDirection: TextDirection.rtl,
-                          child:Text(lastPriceData[index].price?? '', style: TextStyle(fontSize: 12),),),
+                          child:Text((lastPriceData[index].price.toString())?? '', style: TextStyle(fontSize: 12),),),
 
                       ],
                     ),

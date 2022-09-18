@@ -7,7 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../main_nav_page.dart';
-import '../../brands_viwe/presentation/products.dart';
+import '../../brands_viwe/presentation/products_page.dart';
 
 class FavoriteList extends StatelessWidget {
   const FavoriteList({Key? key}) : super(key: key);
@@ -58,7 +58,7 @@ class AllFavoriteCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Get.to(Products());
+        Get.to(ProductsPage(productData: [], Index: 0,));
       },
       child: Container(
         margin: const EdgeInsets.all(15),
